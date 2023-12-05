@@ -11,6 +11,7 @@ const app = express();
 const PORT = 8000;
 const httpServer = app.listen(PORT, () => console.log(`Server listening on port ${PORT}`));
 
+//?Instancia de socket
 const socketServer = new Server(httpServer);
 
 //? Middlewares
@@ -34,27 +35,59 @@ app.engine(
   app.set("views", `${__dirname}/views`);
 
   //? Public
-  app.use(express.static(path.join(__dirname, 'public')));
-  // app.use(express.static(`${__dirname}/public`));
-  
+  app.use('/public', express.static(path.join(__dirname, 'public')));
+
 
   //?Ruta principal
   app.use('/', viewRouter);
-
+  
   //? Ruta a productos en tiempo real
   app.use('/realTimeProducts', viewRouter)
-
   
-    const productManager = new ProductManager('./src/data/productos.json');
-    productManager.init();
+//   const productManager = new ProductManager('./src/data/productos.json');
 
-    //? realizamos la conexion cliente - websocket
-    socketServer.on('connection', async(socket)=> {
-      console.log('Cliente conectado al websocket');
+// socketServer.on('connection', (socketClient) => {
+//     console.log('Cliente conectado al websocket');
 
-      const products = await productManager.getProducts();
-      socket.emit('product_update', products);//*Enviamos productos al cliente 
-      socket.on('product_send', async(data)=>{
+//     // Emit the initial list of products to the connected client
+//     const products = productManager.getProducts();
+//     socketClient.emit('product_update', products);
+
+//     socketClient.on('product_send', (data) => {
+//         console.log(data);
+//         try {
+//             const product = {
+//                 title: data.title,
+//                 description: data.description,
+//                 code: data.code,
+//                 price: data.price,
+//                 stock: data.stock,
+//                 category: data.category,
+//                 body: data.body
+//             };
+
+//             productManager.addProduct(product);
+//             // Emit the updated list of products to all connected clients
+//             const updatedProducts = productManager.getProducts();
+//             socketServer.emit('product_update', updatedProducts);
+//         } catch (error) {
+//             console.error(error)
+//         }
+//     });
+// })
+
+
+// export { socketServer }
+
+
+  const productManager = new ProductManager('./src/data/productos.json'); 
+
+    socketServer.on('connection', (socketClient)=> {
+      console.log('Cliente conectado al websocket y funciona hasta');
+
+      const product =  productManager.getProducts();
+      socketClient.emit('product_update', product);//*Enviamos productos al cliente 
+      socketClient.on('product_send', (data)=>{
         console.log(data);
         //*Recibe la informacion del cliente
         try {
@@ -68,8 +101,8 @@ app.engine(
             body: data.body
           };
 
-          await productManager.addProduct(product)
-          socket.emit('product_update', [product])
+          productManager.addProduct(product)
+          socketClient.emit('product_update', [product])
         } catch (error) {
             console.error(error)
         }

@@ -1,40 +1,88 @@
-const socket = io();
+// const socketClient = io();
+// console.log('Mensaje del lado del cliente');
 
-console.log('mensaje del lado del cliente');
+// const form = document.querySelector("#form");
 
-const form = document.querySelector("form");
+// form.addEventListener("submit", (e) => {
+//   e.preventDefault();
+
+//   const formData = new FormData(form);
+//   const producto = {    
+//     title: formData.get("title"),
+//     description: formData.get("description"),
+//     code: formData.get("code"),
+//     price: parseFloat(formData.get("price")),
+//     stock: parseInt(formData.get("stock")),
+//     category: formData.get("category"),
+//     body: formData.get("body")
+//   };
+
+//   socketClient.emit("product_send", producto);
+//   form.reset();
+// });
+
+// const forms = document.querySelector("#forms");
+// socketClient.on("product_send", (data) => {
+//   console.log(data);
+
+//   data.forEach((producto) => {
+//     const li = document.createElement('li');
+//     li.innerHTML = `
+//       <p>
+//         Title: ${producto.title} -
+//         Body: ${producto.body} -
+//         <button id="button-${producto.id}">Eliminar</button>
+//       </p>
+//     `;
+//     forms.appendChild(li);
+//   });
+
+  
+// });
+const socketClient = io();
+console.log('Mensaje del lado del cliente');
+
+const form = document.querySelector("#form");
 
 form.addEventListener("submit", (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  const formData = new FormData(form);
+    const formData = new FormData(form);
+    const producto = {
+        title: formData.get("title"),
+        description: formData.get("description"),
+        code: formData.get("code"),
+        price: parseFloat(formData.get("price")),
+        stock: parseInt(formData.get("stock")),
+        category: formData.get("category"),
+        body: formData.get("body")
+    };
 
-  const product = {
-    title: formData.get("title"),
-    description: formData.get("description"),
-    code: formData.get("code"),
-    price: parseFloat(formData.get("price")), // Convertir el valor a un número
-    stock: parseInt(formData.get("stock")), // Convertir el valor a un número entero
-    category: formData.get("category"),
-    body: formData.get("body")
-  };
-
-  socket.emit("product_send", product);
-  form.reset();
+    socketClient.emit("product_send", producto);
+    form.reset();
 });
 
-socket.on("product_update", (data) => {
-  console.log(data);
-  const forms = document.querySelector('#forms');
-  forms.innerHTML = data
-    .map((product) => {
-      return `
-      <p>
-        Title: ${product.title} - 
-        Body : ${product.body} -
-        <button id="button-${product.id}">Eliminar</button>
-      </p>
-      `;
-    })
-    .join(''); // Agregar join para convertir el array de strings en un string único
+const forms = document.querySelector("#forms");
+socketClient.on("product_update", (data) => {
+    console.log(data);
+
+    
+   if (Array.isArray(data)) {
+    
+    data.forEach((producto) => {
+        const li = document.createElement('li');
+        li.innerHTML = `
+          <p>
+            Title: ${producto.title} - <br>
+            Descripcion:${producto.description} - <br>
+            Codigo:${producto.code} - <br>
+            Precio:${producto.price} - <br>
+            Stock: ${producto.stock} -<br>
+            
+            <button id="button-${producto.id}">Eliminar</button>
+          </p>
+        `;
+        forms.appendChild(li);
+    });
+}
 });

@@ -5,11 +5,11 @@
         {{#each productos}}
         <li>
             <h3>{{this.title}}</h3>
-            <p>description: {{this.description}}</p>
-            <p>code: {{this.code}}</p>
-            <p>price: ${{this.price}}</p>
+            <p>descripcion: {{this.description}}</p>
+            <p>codigo: {{this.code}}</p>
+            <p>precio: ${{this.price}}</p>
             <p>stock: ${{this.stock}}</p>
-            <p>category: {{this.category}}</p>
+            <p>categoria: {{this.category}}</p>
             <p>id: {{this.id}}</p>
         </li>
         {{/each}}
@@ -17,5 +17,5 @@
       </div>
  </div>
   <script src="/socket.io/socket.io.js"></script>
-  <script src="../public/form.js"></script>
+  {{!-- <script src="../public/form.js"></script> --}}
 

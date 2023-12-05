@@ -6,8 +6,6 @@ const router = Router();
 
 const jsonFilePath = './src/data/productos.json';
 const productManager = new ProductManager(jsonFilePath);
-await productManager.init();
-
 
 router.get('/', async(req, res)=>{
     const productos = await productManager.getProducts();

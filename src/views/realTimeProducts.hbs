@@ -1,19 +1,21 @@
 
     <h1>Listado de productos en Tiempo Real</h1>
     
-    <form>
+    <form id="form">
         <input type="text" name="title" id="title" placeholder="Nombre del Producto">
-        <input type="text" name="description" id="description" placeholder="Descripcion del producto">
-        <input type="text" name="code" id="code" placeholder="Codigo del producto">
+        <input type="text" name="description" id="description" placeholder="Descripción del producto">
+        <input type="text" name="code" id="code" placeholder="Código del producto">
         <input type="number" name="price" id="price" placeholder="Precio del producto">
         <input type="number" name="stock" id="stock" placeholder="Stock">
-        <input type="text" name="category" id="category" placeholder="Categoria">
-       <button type="submit" class="button">Agregar Producto</button>
+        <input type="text" name="category" id="category" placeholder="Categoría">
+        <button type="submit" class="button">Agregar Producto</button>
     </form>
+
 <br>
 <h2>Lista</h2>
 <div id="forms">
 
 </div>
     <script src="/socket.io/socket.io.js"></script>
-    <script src="../public/form.js"></script>
+    <script src="/public/form.js"></script>
+

@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    background-color: red;
 }
 
 #agregarProductos{
@@ -12,3 +13,4 @@
     text-decoration: none;
     color: red;
 }
+
