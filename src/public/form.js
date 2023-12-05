@@ -73,13 +73,12 @@ socketClient.on("product_update", (data) => {
         const li = document.createElement('li');
         li.innerHTML = `
           <p>
-            Title: ${producto.title} - <br>
-            Descripcion:${producto.description} - <br>
-            Codigo:${producto.code} - <br>
-            Precio:${producto.price} - <br>
-            Stock: ${producto.stock} -<br>
-            
-            <button id="button-${producto.id}">Eliminar</button>
+            Titulo: ${producto.title}  <br>
+            Descripcion:${producto.description}  <br>
+            Codigo:${producto.code}  <br>
+            Precio:${producto.price} <br>
+            Stock: ${producto.stock} <br>
+            <button class="button" id="button-${producto.id}">Eliminar</button>
           </p>
         `;
         forms.appendChild(li);

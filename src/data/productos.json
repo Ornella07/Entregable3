@@ -88,5 +88,50 @@
     "thumbnail": "imagen10.jpg",
     "code": "abc122",
     "stock": 55
+  },
+  {
+    "id": 11,
+    "title": "nuevo",
+    "description": "producto",
+    "price": 12,
+    "code": "1234",
+    "stock": 1,
+    "category": "no se"
+  },
+  {
+    "id": 12,
+    "title": "nuevo",
+    "description": "producto",
+    "price": 1,
+    "code": "23",
+    "stock": 1,
+    "category": "agregado"
+  },
+  {
+    "id": 13,
+    "title": "nuevo",
+    "description": "dael",
+    "price": 1,
+    "code": "1",
+    "stock": 1,
+    "category": "ca"
+  },
+  {
+    "id": 15,
+    "title": "nuevo",
+    "description": "prod",
+    "price": 1,
+    "code": "45",
+    "stock": 1,
+    "category": "agregad"
+  },
+  {
+    "id": 16,
+    "title": "nuevo",
+    "description": "age",
+    "price": 2,
+    "code": "135",
+    "stock": 33,
+    "category": "nuevo"
   }
 ]
